@@ -202,28 +202,29 @@ INSERT INTO STIPENDS (student_id, student_name, stipend_amount) VALUES (3, 'Char
 ```
 В случае, если стипендия превышает установленный порог отклонения от максимальной, триггер запишет соответствующую информацию в таблицу STIPEND_LOG и выведет диагностическое сообщение в DBMS_OUTPUT.
 
-## Лабораторная 5: Создание таблицы с использованием последовательностей
+## Лабораторная 5: Создать таблицу SUBJ_LEC и заполнить ее с использованием последовательностей.
 
 ```sql
 -- Создаем последовательность
-CREATE SEQUENCE student_seq
+CREATE SEQUENCE SUBJ_LEC_SEQ
   START WITH 1
   INCREMENT BY 1
   NOCACHE;
 
 -- Создаем таблицу
-CREATE TABLE STUDENTS (
-  student_id NUMBER PRIMARY KEY,
-  first_name VARCHAR2(50),
-  last_name VARCHAR2(50),
-  enrollment_date DATE
+CREATE TABLE SUBJ_LEC (
+    SUBJ_LEC_ID NUMBER(10) PRIMARY KEY,
+    SUBJECT_ID NUMBER(10),
+    LECTURER_ID NUMBER(10),
+    SEMESTER VARCHAR2(20),
+    YEAR NUMBER(4),
 );
 
 -- Вставляем данные с использованием последовательности
-INSERT INTO STUDENTS (student_id, first_name, last_name, enrollment_date)
-VALUES (student_seq.NEXTVAL, 'Иван', 'Иванов', SYSDATE);
+INSERT INTO SUBJ_LEC (SUBJ_LEC_ID, SUBJECT_ID, LECTURER_ID, SEMESTER, YEAR)
+VALUES (SUBJ_LEC_SEQ.NEXTVAL, 1, 1, 'Spring', 2024);
 
-INSERT INTO STUDENTS (student_id, first_name, last_name, enrollment_date)
-VALUES (student_seq.NEXTVAL, 'Петр', 'Петров', SYSDATE);
+INSERT INTO SUBJ_LEC (SUBJ_LEC_ID, SUBJECT_ID, LECTURER_ID, SEMESTER, YEAR)
+VALUES (SUBJ_LEC_SEQ.NEXTVAL, 2, 2, 'Fall', 2024);
 
 ```
